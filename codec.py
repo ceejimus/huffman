@@ -78,7 +78,6 @@ def decode_message(cipher_bits: BitArray, tree: object):
 def encode(msg: str):
     tree, encoding = create_encoding(msg)
     cypher_bits = encode_message(msg, encoding)
-    msg = decode_message(cypher_bits, tree)
     b = get_encoded_message_bits(cypher_bits, encoding)
     return b
 
