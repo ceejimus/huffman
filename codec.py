@@ -15,9 +15,6 @@ def create_encoding(msg: str):
 
     return get_encoding(symbols)
 
-def shift_code(code, bits, buffer):
-    return buffer
-
 def encode_message(msg: str, encoding: dict):
     cb = BitArray()
     for i in range(len(msg)):
