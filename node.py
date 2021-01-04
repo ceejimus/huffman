@@ -8,7 +8,7 @@ class Node():
     def is_leaf(self):
         return self.x is not None
     
-    # for popping of the heapq stack
+    # for popping off the heapq stack
     # lower frequency items have higher priority
     def __lt__(self, other):
         return self.p < other.p
