@@ -10,14 +10,22 @@ def get_offset(depth):
             n += 1
     return os_lkp[depth]
 
+def get_marker(node):
+    m = node.symbol
+    if not m:
+        return '.'
+    if m.isspace():
+        return '*'
+    return m
+
 def get_members(node, depth, offset, tree_depth):
     if node.is_leaf():
     # if not node.left and not node.right:
-        return [(node.get_marker(), depth, offset, 'Leaf')]
+        return [(get_marker(node), depth, offset, 'Leaf')]
     os = get_offset(tree_depth - depth)
     left_members = get_members(node.left, depth + 1, offset - os - 1, tree_depth=tree_depth)
     right_members = get_members(node.right, depth + 1, offset + os + 1, tree_depth=tree_depth)
-    return [(node.get_marker(), depth, offset, 'Node')] + left_members + right_members
+    return [(get_marker(node), depth, offset, 'Node')] + left_members + right_members
     
 def get_tree_depth(node):
     if node.left is None and node.right is None:
@@ -41,7 +49,7 @@ def print_diagram_line(markers, middle):
 
 def get_tree_diagram(node):
     lines = []
-    tree_depth = node.get_tree_depth()
+    tree_depth = get_tree_depth(node)
     middle = 0
     for k in range(1, tree_depth+1):
         middle += (1 + get_offset(k))
